@@ -92,8 +92,7 @@ class GNNStack(nn.Module):
 
         x = self.post_mp(x)
 
-        return emb, torch.sigmoid(x) #F.log_softmax(x, dim=1)
-
+        return emb, torch.sigmoid(x)
 
 
 class CustomConv(pyg_nn.MessagePassing):

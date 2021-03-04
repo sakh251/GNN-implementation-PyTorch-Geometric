@@ -52,6 +52,7 @@ def test(test_loader, model, args, is_validation=False):
             pred = pred.data > 0.5
             label = data.y
             label = label.cuda()
+        #Hamming accuracy for multi-labeled problems
         correct += (((pred) == label).sum(dim=1)).sum()
     total = test_loader.dataset.data.num_nodes
     return correct / (args.num_classes * total)

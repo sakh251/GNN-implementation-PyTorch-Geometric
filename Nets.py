@@ -49,9 +49,6 @@ class GNNStack(nn.Module):
         self.lns = nn.ModuleList()
         self.lns.append(nn.LayerNorm(hidden_dim))
         self.lns.append(nn.LayerNorm(hidden_dim))
-        self.lns.append(nn.LayerNorm(hidden_dim))
-        self.lns.append(nn.LayerNorm(hidden_dim))
-        self.lns.append(nn.LayerNorm(hidden_dim))
         for l in range(2):
             self.convs.append(self.build_conv_model(hidden_dim, hidden_dim))
 
@@ -74,7 +71,6 @@ class GNNStack(nn.Module):
                                   nn.ReLU(), nn.Linear(hidden_dim, hidden_dim)))
 
     def forward(self, data):
-        # data=data.cuda()
         x, edge_index, batch = data.x.cuda(), data.edge_index.cuda(), data.id.cuda()
         if data.num_node_features == 0:
           x = torch.ones(data.num_nodes, 1)

@@ -124,7 +124,7 @@ torch.save(model,'saveModel.pt')
 print('Trained model is saved!')
 
 print('Testing ... ')
-test_result = test(test_loader, model, args)
 
+test_result = test(test_loader, model, args)
 print(f'test results: {test_result}')
 

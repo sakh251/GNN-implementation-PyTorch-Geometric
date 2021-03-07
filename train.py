@@ -66,7 +66,7 @@ parser.add_argument('--path', metavar='path', default='ppi/',
 parser.add_argument('--dataset', metavar='dataset', default='ppi',
                     help='Dataset name',
                     choices=datset_names)
-parser.add_argument('-a', '--arch', metavar='ARCH', default='GNNStack',
+parser.add_argument('-a', '--arch', metavar='ARCH', default='SAGENet',
                     choices=model_names,
                     help='model architecture: ' +
                          ' | '.join(model_names) +
@@ -93,9 +93,9 @@ writer = SummaryWriter("./log/" + datetime.now().strftime("%Y%m%d-%H%M%S"))
 
 writer = SummaryWriter("./log/" + datetime.now().strftime("%Y%m%d-%H%M%S"))
 
-if args.dataset == 'Planetoid' or args.arch == 'SAGENet':
-    print('it is not finished yet... sorry!')
-    exit()
+# if args.dataset == 'Planetoid' or args.arch == 'SAGENet':
+#     print('it is not finished yet... sorry!')
+#     exit()
 
 if args.dataset == 'ppi':
     path = args.path

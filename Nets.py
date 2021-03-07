@@ -181,21 +181,21 @@ class SAGENet(torch.nn.Module):
 `
 
     """
-    def __init__(self, input_dim, output_dim):
+    def __init__(self,input_dim, hidden_dim, output_dim, task='node'):
         super(SAGENet, self).__init__()
 
         self.conv1 = SAGEConv(input_dim, output_dim)
         self.pool1 = TopKPooling(50, ratio=0.8)
         self.conv2 = SAGEConv(50, 50)
         self.pool2 = TopKPooling(50, ratio=0.8)
-        self.conv3 = SAGEConv(50, 50)
-        self.pool3 = TopKPooling(50, ratio=0.8)
-        # self.item_embedding = torch.nn.Embedding(num_embeddings=df.item_id.max() + 1, embedding_dim=embed_dim)
+        self.conv3 = SAGEConv(50, hidden_dim)
+        self.pool3 = TopKPooling(hidden_dim, ratio=0.8)
+        # self.item_embedding = torch.nn.Embedding(num_embeddings=50 + 1, embedding_dim=hidden_dim)
         self.lin1 = torch.nn.Linear(100, 128)
         self.lin2 = torch.nn.Linear(128, 128)
         self.lin3 = torch.nn.Linear(128, 121)
-        self.bn1 = torch.nn.BatchNorm1d(128)
-        self.bn2 = torch.nn.BatchNorm1d(64)
+        # self.bn1 = torch.nn.BatchNorm1d(128)
+        # self.bn2 = torch.nn.BatchNorm1d(64)
         self.act1 = torch.nn.ReLU()
         self.act2 = torch.nn.ReLU()
 
@@ -220,7 +220,7 @@ class SAGENet(torch.nn.Module):
         x3 = torch.cat([gmp(x, batch), gap(x, batch)], dim=1)
 
         x = x1 + x2 + x3
-
+        emb = x
         x = self.lin1(x)
         x = self.act1(x)
         x = self.lin2(x)
@@ -229,5 +229,5 @@ class SAGENet(torch.nn.Module):
 
         x = torch.sigmoid(self.lin3(x)).squeeze(1)
 
-        return x
+        return emb, x
 

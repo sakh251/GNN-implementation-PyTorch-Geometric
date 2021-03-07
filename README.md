@@ -34,3 +34,9 @@ optional arguments:
 ## Training monitoring
 
 tensorboard --logdir log
+### Loss
+![Loss](loss.PNG)
+### Validation
+![Validation](validation.PNG)
+
+### Test Results: 81.68

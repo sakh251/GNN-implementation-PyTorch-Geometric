@@ -75,7 +75,7 @@ parser.add_argument('-j', '--workers', default=4, type=int, metavar='N',
                     help='number of data loading workers (default: 4)')
 parser.add_argument('-H', '--hidden_dim', default=50, type=int, metavar='H',
                     help='dimension of hidden embedding (default: 50)')
-parser.add_argument('--epochs', default=1000, type=int, metavar='N',
+parser.add_argument('--epochs', default=10000, type=int, metavar='N',
                     help='number of total epochs to run')
 parser.add_argument('--valid_steps', default=1, type=int, metavar='VN',
                     help='validate every N steps')
@@ -93,9 +93,9 @@ writer = SummaryWriter("./log/" + datetime.now().strftime("%Y%m%d-%H%M%S"))
 
 writer = SummaryWriter("./log/" + datetime.now().strftime("%Y%m%d-%H%M%S"))
 
-# if args.dataset == 'Planetoid' or args.arch == 'SAGENet':
-#     print('it is not finished yet... sorry!')
-#     exit()
+if args.dataset == 'Planetoid':
+    print('it is not finished yet... sorry!')
+    exit()
 
 if args.dataset == 'ppi':
     path = args.path

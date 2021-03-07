@@ -66,7 +66,7 @@ parser.add_argument('--path', metavar='path', default='ppi/',
 parser.add_argument('--dataset', metavar='dataset', default='ppi',
                     help='Dataset name',
                     choices=datset_names)
-parser.add_argument('-a', '--arch', metavar='ARCH', default='SAGENet',
+parser.add_argument('-a', '--arch', metavar='ARCH', default='GNNStack',
                     choices=model_names,
                     help='model architecture: ' +
                          ' | '.join(model_names) +
